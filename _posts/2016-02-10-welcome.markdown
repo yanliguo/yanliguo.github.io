@@ -1,0 +1,10 @@
+---
+layout:	post
+title:	"Welcome to Yanli Blog"
+date:	2016-02-09 18:34:00 +0800
+---
+I will put some interesting blogs and articles here to share with friends.
+You will also find my code on 
+[yanliguo-github]:https://github.com/yanliguo
+
+
