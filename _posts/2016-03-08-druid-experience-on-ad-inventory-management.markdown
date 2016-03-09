@@ -4,10 +4,9 @@ title:	"Druid Experience on Ad Inventory Management"
 date:	2016-03-08 16:00:00 +0800
 ---
 
->*"A fast column-oriented distributed data store."*
->*- [Druid][druid-io]*
+Inventory management is extremely important for garranteed ad delivery.
 
-## Features
+## Inventory
 * OLAP
 * Sub-second query
 * Real-time
@@ -15,29 +14,30 @@ date:	2016-03-08 16:00:00 +0800
 * Distributed & fault tolerance
 * Compatible with Hadoop / Spark / Kafka / Storm ...
 
-## Architecture
+## 2 Steps Prediction
 
-### Ingesting realtime data
+### 1. Stream Prediction
 
-### Ingesting batch data
+### 2. From Stream to Ad Inventory
 
-#### Using hadoop job
+## Inventory Metrics Aggregation
 
-***[Akka implementation of druid-indexer job dispatcher][akka-druid-indexer]***
-***[Working with Docker][akka-druid-indexer-with-docker]***
+### Alternative 1: Distributed Mysql
 
-#### Indexing Service
+### Alternative 2: Kylin
 
-## A Query Session
+### Alternative 3: MR / Spark
 
-## Merits
-* Real-time & historical support, users don't have to write more job to handle real-time data to hand off to historical
-* Fast & convenient compressed bitmap indexing on dimensions  ------- Core of Druid
-* In-memory
-## Demerits
-* Historical is read only, writing overwrites historical segments
-* Segment should & only should be divided by time, and any line of data have to be with a timestamp
-* If there is not enough memory, cold data will be flashed into disk. Querying on cold data will be slower.
+### Alternative 4: Druid
+
+## Our Usage
+
+### 1. Data Indexer
+
+### 2. Cluster management
+
+### 3. Performance Tuning
+
 
 [druid-io]:http://druid.io/
 [druid-overview-by-myself]:http://yanliguo.github.io/blog/druid-overview.html
