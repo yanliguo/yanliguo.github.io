@@ -11,12 +11,18 @@ date:	2016-03-08 15:42:00 +0800
 * OLAP
 * Sub-second query
 * Real-time
-* Time-serial data: each line of data have to be taged with a timestamp
 * Scalable to support PB-data
 * Distributed & fault tolerance
 * Compatible with Hadoop / Spark / Kafka / Storm ...
+* Time-serial data: each line of data have to be taged with a timestamp
+![Druid Data Type][data-type]
+
 
 ## Architecture
+
+![Druid Architecture][img-arch]
+
+Druid cluster is highly available, highly scaleble horizonly. Even when the zookeeper is down, broker can provide query service based on the current state, instead of service unavailable.
 
 ### Segment
 Data in a small time interval (`a bucket`). For each pair of `<Dinmension_x, Value_y>`, a `bitmap` index is built, compressed and serialized, as an individual column,  into this segment. ([An article][druid-compression] about this compression algorithm). So only related dimension and values will be loaded in a query session.
@@ -43,11 +49,10 @@ The storage of serialized segment, historical data. Druid supports local disk, S
 
 
 ## Data Ingestion
-
+![Druid data ingest flow][ingest-flow]
 
 ### Ingesting realtime data
-As talked above, raw data is fed into realtime and kept in the right format of each line.  
-
+As talked above, raw data is fed into realtime and aggregated (if needed) and kept in row oriented.  
 
 
 #### Using hadoop job to ingest batch data
@@ -56,9 +61,12 @@ As talked above, raw data is fed into realtime and kept in the right format of e
 ***[Working with Docker][akka-druid-indexer-with-docker]***
 
 #### Indexing Service to ingest batch data
-
+Providing data set to indexing service, Overload creates & dispatches & monitors new sub task to a Middle Manager. Middle Manager keeps local peons loading balance, that is to say, Middle Manager will find a not so busy peon to do the new task.  
+![Indexing Service][indexing-service]
 
 ## A Query Session
+
+![This is how druid processing query request][query-session]
 
 
 ## Merits
@@ -74,3 +82,9 @@ As talked above, raw data is fed into realtime and kept in the right format of e
 [akka-druid-indexer]:https://yanliguo.github.org
 [akka-druid-indexer-with-docker]:https://yanliguo.github.org
 [druid-compression]:https://yanliguo.github.org
+
+[img-arch]: http://128.199.173.102/images/druid/architechture.png "Druid Architecture"
+[data-type]: http://128.199.173.102/images/druid/column-types.png "Data types"
+[query-session]: http://128.199.173.102/images/druid/query-flow.png "Query Session"
+[indexing-service]: http://128.199.173.102/images/druid/indexing-service.png "Druid Indexing Service"
+[ingest-flow]: http://128.199.173.102/images/druid/realtime-batch-data-flow.png "Data Ingest Flow"
