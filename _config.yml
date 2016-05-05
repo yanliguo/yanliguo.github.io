@@ -11,7 +11,7 @@ email: guoyanli.psnl@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Personal blog site, served by github pages. I will share some IT
   technology artices and some interesting blogs, pages here.
-baseurl: "/" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://yanliguo.github.io" # the base hostname & protocol for your site
 twitter_username: yanliguo
 github_username:  yanliguo
